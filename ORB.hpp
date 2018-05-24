@@ -1,4 +1,4 @@
-/*****************************************************************
+ï»¿/*****************************************************************
 Name : ORB
 Date : 2018/03/01
 By   : CharlotteHonG
@@ -11,15 +11,15 @@ Final: 2018/03/19
 #include "LapBlend\LapBlend.hpp"
 #include "WarpPers\WarpPers.hpp"
 
-// º~©ú¶ZÂ÷
+// æ¼¢æ˜è·é›¢
 void create_ORB(const ImgRaw & img, Feat & feat);
-// °t¹ïORB
+// é…å°ORB
 void matchORB(Feat & feat1, const Feat & feat2, vector<double>& HomogMat);
-// ¦X¨Ö¨â±i¹Ï
+// åˆä½µå…©å¼µåœ–
 ImgRaw imgMerge(const ImgRaw & img1, const ImgRaw & img2);
-// µe½u (¹ï¥»¦a¸ê®Æµ²ºc)
+// ç•«ç·š (å°æœ¬åœ°è³‡æ–™çµæ§‹)
 void featDrawLine(string name, const ImgRaw & stackImg, const Feat & feat);
-// µe½u (¹ïblend¸ê®Æµ²ºc)
+// ç•«ç·š (å°blendè³‡æ–™çµæ§‹)
 void featDrawLine2(string name, const ImgRaw & stackImg, Feature const * const * RANfeat, size_t RANfeatNum);
-// Âà´«¨ì blen ªº¸ê®Æµ²ºc
+// è½‰æ›åˆ° blen çš„è³‡æ–™çµæ§‹
 void getNewfeat(const Feat & feat, Feature **& RANfeat, size_t & RANfeatNum);
