@@ -19,16 +19,12 @@ CXXLIB += -Ifastlib
 CXXINC :=
 CXXINC += `pkg-config opencv --cflags`
 CXXFLAGS += $(CXXLIB) $(CXXINC)
-# =============================================
-# make 預設執行
-# =============================================
-resule: main
 
 # =============================================
 # 編譯檔案命令 [tag:cmd]
 # =============================================
 # 連結所有編譯後的檔案產生可執行檔
-main: \
+main.out: \
 	main.o \
 	Raw2img.o \
 	imglib.o \
@@ -43,7 +39,7 @@ main: \
 	LapBlend.o\
 	WarpPers.o\
 
-	$(CXX) *.o -o main $(CXXFLAGS)
+	$(CXX) *.o -o main.out $(CXXFLAGS)
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # Main 檔案
 main.o: main.cpp
@@ -87,14 +83,16 @@ WarpPers.o: WarpPers/WarpPers.cpp WarpPers/WarpPers.hpp
 # =============================================
 # 命令列
 # =============================================
+# make 預設執行
+resule: ./main.out
 # 清理所有編譯的檔案
 clean:
-	rm -f *.o OpenBMP_main
-	rm -f obj/*.o OpenBMP_main
+	rm -f *.o *.out
+	rm -f obj/*.o *.out
 cleanimg:
-	rm -f ImgOutput/*.bmp main
+	rm -f ImgOutput/*.bmp
 # 僅編譯出可執行檔，並清除緩存
 run: resule
-	./main
+	./main.out
 rebuile: clean resule
-	./main
+	./main.out
