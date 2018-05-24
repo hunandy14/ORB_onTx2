@@ -10,7 +10,7 @@ Final: 2018/03/19
 #include <fstream>
 #include <bitset>
 using namespace std;
-#include <opencv2\opencv.hpp> 
+#include <opencv2/opencv.hpp> 
 using namespace cv;
 #include <Timer.hpp>
 //====================================================================================

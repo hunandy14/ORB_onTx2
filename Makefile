@@ -11,6 +11,9 @@ CXXLIB += `pkg-config opencv --libs`
 CXXLIB += -IImgRaw/imglib
 CXXLIB += -IImgRaw/Raw2Img
 CXXLIB += -IImgRaw
+CXXLIB += -Ifeat
+CXXLIB += -Iharris_coners
+CXXLIB += -Ifastlib
 
 CXXINC :=
 CXXINC += `pkg-config opencv --cflags`
@@ -24,7 +27,17 @@ resule: main
 # 編譯檔案命令 [tag:cmd]
 # =============================================
 # 連結所有編譯後的檔案產生可執行檔
-main: main.o Raw2img.o imglib.o Imgraw.o opencvTest.o
+main: \
+	main.o \
+	Raw2img.o \
+	imglib.o \
+	Imgraw.o \
+	opencvTest.o \
+\
+	feat.o \
+	harris_coners.o \
+	fastlib/fast.o \
+
 	$(CXX) *.o -o main $(CXXFLAGS)
 
 
@@ -43,6 +56,23 @@ Imgraw.o: ImgRaw/Imgraw.cpp ImgRaw/Imgraw.hpp
 # opencvTest 檔案
 opencvTest.o: opencvTest.cpp opencvTest.hpp
 	$(CXX) -c opencvTest.cpp $(CXXFLAGS)
+
+
+
+# ORB 檔案
+# opencvTest.o: ORB.cpp ORB.hpp
+# 	$(CXX) -c ORB.cpp $(CXXFLAGS)
+
+
+feat.o: feat/feat.cpp feat/feat.hpp
+	$(CXX) -c feat/feat.cpp $(CXXFLAGS)
+harris_coners.o: harris_coners/harris_coners.cpp harris_coners/harris_coners.hpp
+	$(CXX) -c harris_coners/harris_coners.cpp $(CXXFLAGS)
+
+fastlib_file := fastlib/fast_10.c  fastlib/fast_11.c  fastlib/fast_12.c  fastlib/fast_9.c  fastlib/fast.c fastlib/nonmax.c
+fastlib/fast.o: fastlib/fast.c # 太多個了求方便只抓一個檢查
+	$(CXX) -c $(fastlib_file) $(CXXFLAGS)
+
 
 # =============================================
 # 命令列
