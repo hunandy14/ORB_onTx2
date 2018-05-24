@@ -12,9 +12,9 @@ Final: 2018/03/19
 using namespace std;
 #include <opencv2/opencv.hpp>
 using namespace cv;
-// #include <Timer.hpp>
+#include "Timer.hpp"
 //====================================================================================
-// #include "opencvTest.hpp"
+#include "opencvTest.hpp"
 // #include "ORB.hpp"
 #include "ImgRaw/Imgraw.hpp"
 #include "Imgraw.hpp"
