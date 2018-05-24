@@ -25,7 +25,7 @@ Final: 2017/11/16
 
 
 
-// §Ö³tatan¹Bºâ
+// å¿«é€Ÿatané‹ç®—
 float fastAtan2f(float dy, float dx){
 	static const float atan2_p1 = 0.9997878412794807f*(float)(180/M_PI);
 	static const float atan2_p3 = -0.3258083974640975f*(float)(180/M_PI);
@@ -74,7 +74,7 @@ float fastAtan2f_rad(float dy, float dx){
 		a = M_PI*2.0 - a;
 	return a;
 }
-// §Ö³t atan ºâªk
+// å¿«é€Ÿ atan ç®—æ³•
 float fastAtanf(float dy){
 	static const float atan2_p1 = 0.9997878412794807f*(float)(180/M_PI);
 	static const float atan2_p3 = -0.3258083974640975f*(float)(180/M_PI);
@@ -125,7 +125,7 @@ float fastAtanf_rad(float dy){
 }
 
 
-// ImgRaw «Øºc¤l
+// ImgRaw å»ºæ§‹å­
 ImgRaw::ImgRaw(string bmpname, string path){
 	if(path!="") {
 		bmpname = path+"\\"+bmpname;
@@ -134,12 +134,12 @@ ImgRaw::ImgRaw(string bmpname, string path){
 	vector<unsigned char> img;
 	uint32_t width, height;
 	uint16_t bits;
-	// Åª¨ú¹Ï¤ù
+	// è®€å–åœ–ç‰‡
 	Raw2Img::read_bmp(img, bmpname, &width, &height, &bits);
 	this->width    = width;
 	this->height   = height;
 	this->bitCount = bits;
-	// ªì©l¤Æ(§t¥¿³W¤Æ)
+	// åˆå§‹åŒ–(å«æ­£è¦åŒ–)
 	raw_img.resize(img.size());
 	for (size_t i = 0; i < img.size(); i++) {
 		if(nomal) {
@@ -159,12 +159,12 @@ ImgRaw::ImgRaw(string bmpname, string path, bool nomal) {
 	vector<unsigned char> img;
 	uint32_t width, height;
 	uint16_t bits;
-	// Åª¨ú¹Ï¤ù
+	// è®€å–åœ–ç‰‡
 	Raw2Img::read_bmp(img, bmpname, &width, &height, &bits);
 	this->width    = width;
 	this->height   = height;
 	this->bitCount = bits;
-	// ªì©l¤Æ(§t¥¿³W¤Æ)
+	// åˆå§‹åŒ–(å«æ­£è¦åŒ–)
 	raw_img.resize(img.size());
 	for (size_t i = 0; i < img.size(); i++) {
 		if(nomal) {
@@ -174,7 +174,7 @@ ImgRaw::ImgRaw(string bmpname, string path, bool nomal) {
 		}
 	}
 }
-// ¤GºûÂù½u©Ê¹BºâÅª¨ú
+// äºŒç¶­é›™ç·šæ€§é‹ç®—è®€å–
 const ImgRaw::types ImgRaw::atBilinear(float y, float x) const {
 	if (x < 0 || y < 0 || x>=width-1 || y >=height-1){
 		std::cerr << "atBilinear(x, y) : [x, y] our of range. \n";
@@ -183,34 +183,34 @@ const ImgRaw::types ImgRaw::atBilinear(float y, float x) const {
 	}
 	return Scaling::bilinear(raw_img, width, y, x);
 }
-// ¨ú¥X±ÛÂà«áªº¹Ï¤ù
+// å–å‡ºæ—‹è½‰å¾Œçš„åœ–ç‰‡
 ImgRaw ImgRaw::rotateImg(size_t x, size_t y, float radius, float sita) {
 	ImgRaw& Img = *this;
-	// µe½bÀY¼Ğ°O
+	// ç•«ç®­é ­æ¨™è¨˜
 	//Draw::draw_arrow(Img, y, x, radius, sita, 1);
 	//Img.bmp("rotate_test.bmp");
-	// ·s¹Ïªø¼e¥b®|
+	// æ–°åœ–é•·å¯¬åŠå¾‘
 	float maxRadius = radius;
 	int rotH = floor(maxRadius);
 	int rotW = floor(maxRadius);
 	ImgRaw rotate(rotW*2, rotH*2, 8);
-	// ¹wºâ
-	sita *= -1; // §â·s¹ÏÂà¦^0«×
+	// é ç®—
+	sita *= -1; // æŠŠæ–°åœ–è½‰å›0åº¦
 	float cos_t = cosf(sita*(float)(M_PI/180));  
 	float sin_t = sinf(sita*(float)(M_PI/180));
-	// ¶]·s¹Ï
+	// è·‘æ–°åœ–
 	for (int j = -rotH; j < rotH; j++) {
 		for (int i = -rotW; i < rotW; i++) {
-			// ¿é¤J·s¹Ï®y¼Ğªğ¦^ÂÂ¹Ï®y¼Ğ(¤w0, 0¬°¶ê¤ß±ÛÂà)
-			float r_rot = (j)*sin_t + (i)*cos_t; // ­ì¹ÏX®y¼Ğ
-			float c_rot = (j)*cos_t - (i)*sin_t; // ­ì¹ÏY®y¼Ğ
-												 // ÁB¥¿¦^«ü©w¦ì¸m
+			// è¼¸å…¥æ–°åœ–åº§æ¨™è¿”å›èˆŠåœ–åº§æ¨™(å·²0, 0ç‚ºåœ“å¿ƒæ—‹è½‰)
+			float r_rot = (j)*sin_t + (i)*cos_t; // åŸåœ–Xåº§æ¨™
+			float c_rot = (j)*cos_t - (i)*sin_t; // åŸåœ–Yåº§æ¨™
+												 // çŸ¯æ­£å›æŒ‡å®šä½ç½®
 			float rbin = r_rot + x; 
 			float cbin = c_rot + y;
-			// ¥h°£­ì¹Ï¥~ªºÂI
+			// å»é™¤åŸåœ–å¤–çš„é»
 			if (cbin < Img.height - 1 and cbin > 0) {
 				if (rbin < Img.width - 1 and rbin > 0) {
-					// Âù½u©m´¡¸É
+					// é›™ç·šå§“æ’è£œ
 					rotate.at2d(j+rotH, i+rotW) = Img.atBilinear(cbin, rbin); 
 				}
 			}
@@ -242,18 +242,18 @@ void ImgRaw::gauBlur(ImgRaw& tar, ImgRaw& sou, float p) {
 }
 
 
-// ¼g BMP ÀÉ
+// å¯« BMP æª”
 void ImgRaw::bmp(string name, uint32_t bits) {
 	if (bits == 0) { bits = this->bitCount; }
-	vector<unsigned char> img = (*this);// ¦³­«¸üÂà´«¨ç¦¡
+	vector<unsigned char> img = (*this);// æœ‰é‡è¼‰è½‰æ›å‡½å¼
 	Raw2Img::raw2bmp(name, img, width, height, bits);
 }
 void ImgRaw::bmp(string name, uint32_t bits) const {
 	if (bits == 0) { bits = this->bitCount; }
-	vector<unsigned char> img = (*this);// ¦³­«¸üÂà´«¨ç¦¡
+	vector<unsigned char> img = (*this);// æœ‰é‡è¼‰è½‰æ›å‡½å¼
 	Raw2Img::raw2bmp(name, img, width, height, bits);
 }
-// Âà¬°¦Ç¶¥
+// è½‰ç‚ºç°éš
 ImgRaw ImgRaw::ConverGray() const {
 	if (bitCount == 24) {
 		ImgRaw gray(this->width, this->height, 8);
@@ -270,18 +270,18 @@ ImgRaw ImgRaw::ConverGray() const {
 
 
 
-// µe½u
+// ç•«ç·š
 void Draw::drawLine_p(ImgRaw& img, int y, int x, int y2, int x2, float val) {
 	if(img.nomal) {
 		val /= DrawPixNomal;
 	}
-	// ¨âÂI¤§¶¡ªº¶ZÂ÷®t
+	// å…©é»ä¹‹é–“çš„è·é›¢å·®
 	float dx = x2-x;
 	float dy = y2-y;
-	// ¥HY¶b¬°¥D
+	// ä»¥Yè»¸ç‚ºä¸»
 	float sita=fastAtan2f(dy, dx);
 	if (sita>45 and sita<135 or sita>225 and sita<315) {
-		float slopeY = dx/dy; // ±×²v
+		float slopeY = dx/dy; // æ–œç‡
 		for (int i = 0; i < abs(dy); i++) {
 			int iFix = dy>0? i:-i;
 			int currPos = iFix*slopeY + x;
@@ -295,9 +295,9 @@ void Draw::drawLine_p(ImgRaw& img, int y, int x, int y2, int x2, float val) {
 			img.raw_img[distY*img.width + distX] = val;
 		}
 	} 
-	// ¥HX¶b¬°¥D
+	// ä»¥Xè»¸ç‚ºä¸»
 	else {
-		float slopeX = dy/dx; // ±×²v
+		float slopeX = dy/dx; // æ–œç‡
 		for (int i = 0; i < abs(dx); i++) {
 			int iFix = dx>0? i:-i;
 			int currPos = iFix*slopeX + y;
@@ -316,7 +316,7 @@ void Draw::drawLine_s(ImgRaw& img, int y, int x, float line_len, float sg, float
 	if(img.nomal) {
 		val /= DrawPixNomal;
 	}
-	// ¨¾§b
+	// é˜²å‘†
 	if (line_len < 0) {
 		return;
 	}
@@ -324,17 +324,17 @@ void Draw::drawLine_s(ImgRaw& img, int y, int x, float line_len, float sg, float
 		img[x*img.width + y] = val;
 		return;
 	}
-	// ºâÀY§À
+	// ç®—é ­å°¾
 	int x2 = x + line_len*cos(sg * M_PI/180.0);
 	int y2 = y + line_len*sin(sg * M_PI/180.0);
-	// µe½u
+	// ç•«ç·š
 	drawLine_p(img, y, x, y2, x2, val);
 }
 void Draw::draw_arrow(ImgRaw& img, int y, int x, float line_len, float sg, float val) {
 	if(img.nomal) {
 		val /= DrawPixNomal;
 	}
-	// ¨¾§b
+	// é˜²å‘†
 	if (line_len < 0) {
 		return;
 	}
@@ -342,25 +342,25 @@ void Draw::draw_arrow(ImgRaw& img, int y, int x, float line_len, float sg, float
 		img[x*img.width + y] = val;
 		return;
 	}
-	// ºâÀY§À
+	// ç®—é ­å°¾
 	int x2 = x + line_len*cos(sg * M_PI/180.0);
 	int y2 = y + line_len*sin(sg * M_PI/180.0);
-	// µe½u
+	// ç•«ç·š
 	drawLine_p(img, y, x, y2, x2, val);
-	// µeÀY
+	// ç•«é ­
 	drawLine_s(img, y2, x2, 10, sg-150, val);
 	drawLine_s(img, y2, x2, 10, sg+150, val);
 }
-// µe½uRGB
+// ç•«ç·šRGB
 void Draw::drawLineRGB_p(ImgRaw& img, int y, int x, int y2, int x2, 
 	float r, float g, float b) {
-	// ¨âÂI¤§¶¡ªº¶ZÂ÷®t
+	// å…©é»ä¹‹é–“çš„è·é›¢å·®
 	float dx = x2-x;
 	float dy = y2-y;
-	// ¥HY¶b¬°¥D
+	// ä»¥Yè»¸ç‚ºä¸»
 	float sita=fastAtan2f(dy, dx);
 	if (sita>45 and sita<135 or sita>225 and sita<315) {
-		float slopeY = dx/dy; // ±×²v
+		float slopeY = dx/dy; // æ–œç‡
 		for (int i = 0; i < abs(dy); i++) {
 			int iFix = dy>0? i:-i;
 			int currPos = iFix*slopeY + x;
@@ -377,9 +377,9 @@ void Draw::drawLineRGB_p(ImgRaw& img, int y, int x, int y2, int x2,
 			img.raw_img[posi*3 + 2] = b;
 		}
 	} 
-	// ¥HX¶b¬°¥D
+	// ä»¥Xè»¸ç‚ºä¸»
 	else {
-		float slopeX = dy/dx; // ±×²v
+		float slopeX = dy/dx; // æ–œç‡
 		for (int i = 0; i < abs(dx); i++) {
 			int iFix = dx>0? i:-i;
 			int currPos = iFix*slopeX + y;
@@ -398,7 +398,7 @@ void Draw::drawLineRGB_p(ImgRaw& img, int y, int x, int y2, int x2,
 	}
 }
 void Draw::drawLineRGB_p(ImgRaw& img, int y, int x, int y2, int x2) {
-	// ÀH¾÷ÃC¦â
+	// éš¨æ©Ÿé¡è‰²
 	auto random_num = [] {
 		return ((rand() / (RAND_MAX+1.0)) * (1 - 0) + 0);
 	};
@@ -415,7 +415,7 @@ void Draw::drawLineRGB_p(ImgRaw& img, int y, int x, int y2, int x2) {
 	drawLineRGB_p(img, y, x, y2, x2, rVal, gVal, bVal);
 }
 void Draw::drawLineRGB_s(ImgRaw& img, int y, int x, float line_len, float sg) {
-	// ¨¾§b
+	// é˜²å‘†
 	if (line_len < 0) {
 		return;
 	}
@@ -427,10 +427,10 @@ void Draw::drawLineRGB_s(ImgRaw& img, int y, int x, float line_len, float sg) {
 		}
 		return;
 	}
-	// ºâÀY§À
+	// ç®—é ­å°¾
 	int x2 = x + line_len*cos(sg * M_PI/180.0);
 	int y2 = y + line_len*sin(sg * M_PI/180.0);
-	// µe½u
+	// ç•«ç·š
 	if(img.nomal) {
 		drawLineRGB_p(img, y, x, y2, x2, 242/DrawPixNomal, 66/DrawPixNomal, 54/DrawPixNomal);
 	} else {
@@ -440,7 +440,7 @@ void Draw::drawLineRGB_s(ImgRaw& img, int y, int x, float line_len, float sg) {
 void Draw::draw_arrowRGB(ImgRaw& img, int y, int x, float line_len, float sg) {
 	float value = 200 /255.0;
 	float endvalue = 255 /255.0;
-	// ¨¾§b
+	// é˜²å‘†
 	if (line_len < 0) {
 		return;
 	}
@@ -452,18 +452,18 @@ void Draw::draw_arrowRGB(ImgRaw& img, int y, int x, float line_len, float sg) {
 		}
 		return;
 	}
-	// ºâÀY§À
+	// ç®—é ­å°¾
 	int x2 = x + line_len*cos(sg * M_PI/180.0);
 	int y2 = y + line_len*sin(sg * M_PI/180.0);
 	
-	// µe½u
+	// ç•«ç·š
 	if(img.nomal) {
 		drawLineRGB_p(img, y, x, y2, x2, 242/DrawPixNomal, 66/DrawPixNomal, 54/DrawPixNomal);
 	} else {
 		drawLineRGB_p(img, y, x, y2, x2, 242, 66, 54);
 	}
 
-	// µeÀY
+	// ç•«é ­
 	size_t head_len = 6;
 	drawLineRGB_s(img, y2, x2, head_len, sg-150);
 	drawLineRGB_s(img, y2, x2, head_len, sg+150);

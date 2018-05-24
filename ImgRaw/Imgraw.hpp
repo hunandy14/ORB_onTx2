@@ -1,4 +1,4 @@
-/*****************************************************************
+ï»¿/*****************************************************************
 Name : imgraw
 Date : 2017/11/16
 By   : CharlotteHonG
@@ -9,7 +9,7 @@ Final: 2017/11/16
 
 #include "imglib/imglib.hpp"
 //-----------------------------------------------------------------
-// §Ö³tatan¹Bºâ
+// å¿«é€Ÿatané‹ç®—
 float fastAtan2f(float dy, float dx);
 float fastAtan2f_rad(float dy, float dx);
 float fastAtanf(float dy);
@@ -23,7 +23,7 @@ class ImgRaw {
 private:
 	using types = float;
 public:
-	// ªì©l¤Æ
+	// åˆå§‹åŒ–
 	ImgRaw() = default;
 	ImgRaw(vector<types> img, uint32_t width, uint32_t height, uint16_t bits) :
 		raw_img(img), width(width), height(height), bitCount(bits) {}
@@ -43,7 +43,7 @@ public:
 		width(width), height(height), bitCount(bits){}
 	ImgRaw(string bmpname, string path="");
 	ImgRaw(string bmpname, string path, bool nomal);
-	// ½Æ»s¨ç¦¡
+	// è¤‡è£½å‡½å¼
 	/*ImgRaw& operator=(const ImgRaw& other) {
 		if (this != &other) {
 			raw_img = other.raw_img;
@@ -53,7 +53,7 @@ public:
 		}
 		return *this;
 	}*/
-	// Áô¦¡Âà´«
+	// éš±å¼è½‰æ›
 	operator vector<types>&() { return raw_img; }
 	operator const vector<types>&() const { return raw_img; }
 	operator vector<unsigned char>() {
@@ -80,26 +80,26 @@ public:
 		}
 		return img;
 	}
-	// ­«¸ü¤U¼Ğ²Å¸¹
+	// é‡è¼‰ä¸‹æ¨™ç¬¦è™Ÿ
 	types & operator[](size_t idx) {
 		return const_cast<types&>(static_cast<const ImgRaw&>(*this)[idx]);
 	}
 	const types & operator[](size_t idx) const { return raw_img[idx]; }
-	// ¤GºûÅª¨ú
+	// äºŒç¶­è®€å–
 	types & at2d(size_t y, size_t x) {
 		return const_cast<types&>(static_cast<const ImgRaw&>(*this).at2d(y, x));
 	}
 	const types & at2d(size_t y, size_t x) const {
 		return raw_img[y*width + x];
 	}
-	// ¤GºûÂù½u©Ê¹BºâÅª¨ú
+	// äºŒç¶­é›™ç·šæ€§é‹ç®—è®€å–
 	const types atBilinear(float y, float x) const;
-	// ¤j¤p¬O§_¬Ûµ¥
+	// å¤§å°æ˜¯å¦ç›¸ç­‰
 	friend bool operator!=(const ImgRaw& lhs, const ImgRaw& rhs);
 	friend bool operator==(const ImgRaw& lhs, const ImgRaw& rhs);
-	// Àò±o¤j¤p
+	// ç²å¾—å¤§å°
 	const size_t size() const { return this->raw_img.size(); }
-	// ­«³]¤j¤p
+	// é‡è¨­å¤§å°
 	void resize(uint32_t width, uint32_t height, uint16_t bits) {
 		raw_img.resize(width*height * bits/8);
 		this->width=width;
@@ -107,14 +107,14 @@ public:
 		this->bitCount=bits;
 	}
 public:
-	// Âà¬°¦Ç¶¥
+	// è½‰ç‚ºç°éš
 	ImgRaw ConverGray() const;
-	// ¼g BMP ÀÉ
+	// å¯« BMP æª”
 	void bmp(string name, uint32_t bits=0);
 	void bmp(string name, uint32_t bits=0) const;
-	// ¨ú¥X±ÛÂà«áªº¹Ï¤ù
+	// å–å‡ºæ—‹è½‰å¾Œçš„åœ–ç‰‡
 	ImgRaw rotateImg(size_t x, size_t y, float radius, float sita);
-public: // ©ñ¤jÁY¤p (Ä±±o²ÖÂØ·Q®³±¼)
+public: // æ”¾å¤§ç¸®å° (è¦ºå¾—ç´¯è´…æƒ³æ‹¿æ‰)
 	static void zero(ImgRaw& tar, ImgRaw& sou, float z);
 	static void first(ImgRaw& tar, ImgRaw& sou, float z);
 	static void cubic(ImgRaw& tar, ImgRaw& sou, float z);
@@ -126,7 +126,7 @@ public:
 	uint16_t bitCount = 0;
 	bool nomal = 1;
 };
-// ¤j¤p¬O§_¬Ûµ¥
+// å¤§å°æ˜¯å¦ç›¸ç­‰
 inline bool operator!=(const ImgRaw& lhs, const ImgRaw& rhs) {
 	return !(lhs == rhs);
 }
@@ -139,7 +139,7 @@ inline bool operator==(const ImgRaw& lhs, const ImgRaw& rhs) {
 
 
 //-----------------------------------------------------------------
-// µe½u
+// ç•«ç·š
 #define DrawPixNomal 255.0
 
 class Draw {

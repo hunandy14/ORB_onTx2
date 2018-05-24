@@ -1,5 +1,5 @@
 ﻿/*****************************************************************
-Name : 
+Name :
 Date : 2018/03/01
 By   : CharlotteHonG
 Final: 2018/03/19
@@ -10,30 +10,29 @@ Final: 2018/03/19
 #include <fstream>
 #include <bitset>
 using namespace std;
-// #include <opencv2\opencv.hpp> 
-// using namespace cv;
+#include <opencv2/opencv.hpp>
+using namespace cv;
 // #include <Timer.hpp>
 //====================================================================================
 // #include "opencvTest.hpp"
 // #include "ORB.hpp"
+#include "ImgRaw/Imgraw.hpp"
 #include "Imgraw.hpp"
 
 
 void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool autoname=0) {
 	static int num=0;
 	// 開圖
+
 	ImgRaw img1(name1, "", 0);
 	ImgRaw img1_gray = img1.ConverGray();
 	img1_gray.nomal=0;
 	ImgRaw img2(name2, "", 0);
 	ImgRaw img2_gray = img2.ConverGray();
 	img2_gray.nomal=0;
-
 	// ImgRaw stackImg = imgMerge(img1, img2);
-
 	ImgRaw imgL(name1);
 	ImgRaw imgR(name2);
-	imgR.bmp("Tx2_test.bmp");
 
 	// basic_ImgData warpL, warpR, lapblend;
 	// ImgData_read(warpL, name1);
@@ -50,7 +49,7 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 
 	// //t1.start();
 	// create_ORB(img2_gray, feat2); // 0.25ms
-	// //t1.print(" create_ORB2"); 
+	// //t1.print(" create_ORB2");
 
 	// // 尋找配對點
 	// vector<double> HomogMat;
@@ -67,7 +66,7 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	// Feature** RANSAC_feat=nullptr;
 	// //RANSAC_feat = new Feature*[RANSAC_num];
 	// getNewfeat(feat2, RANSAC_feat, RANSAC_num);
-	// featDrawLine2("resultImg\\_matchImg_RANSACImg"+to_string(num)+".bmp", stackImg, RANSAC_feat, RANSAC_num);
+	// featDrawLine2("resultImg//_matchImg_RANSACImg"+to_string(num)+".bmp", stackImg, RANSAC_feat, RANSAC_num);
 
 
 
@@ -92,8 +91,8 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	// //cout << "=======================================" << endl;
 	// total.print("# total time"); // 93ms
 
-	
-	
+
+
 	// if (autoname) {
 	// 	outName = outName+to_string(num)+".bmp";
 	// 	cout << outName << endl;
@@ -106,23 +105,23 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 }
 //====================================================================================
 int main(int argc, char const *argv[]) {
-	cout << "GGGGGGGGGGGGGGGGG" << endl;
+	cout << "=!!======= run is good =======!!=" << endl;
 
-	// imgStitch("srcImg\\kanna.bmp", "srcImg\\kanna90.bmp", "resultImg\\_test.bmp");
+	// imgStitch("srcImg//kanna.bmp", "srcImg//kanna90.bmp", "resultImg//_test.bmp");
 
-	imgStitch("srcImg\\sc02.bmp", "srcImg\\sc03.bmp", "resultImg\\sc02_blend.bmp");
-	// imgStitch("srcImg\\ball_01.bmp", "srcImg\\ball_02.bmp", "resultImg\\ball_01_blend.bmp");
+	imgStitch("srcImg//sc02.bmp", "srcImg//sc03.bmp", "resultImg//sc02_blend.bmp");
+	// imgStitch("srcImg//ball_01.bmp", "srcImg//ball_02.bmp", "resultImg//ball_01_blend.bmp");
 
-	// imgStitch("data\\DSC_2936.bmp", "data\\DSC_2937.bmp", "resultImg\\blend", 1);
-	// imgStitch("data\\DSC_2944.bmp", "data\\DSC_2945.bmp", "resultImg\\blend", 1);
-	// imgStitch("data\\DSC_2952.bmp", "data\\DSC_2953.bmp", "resultImg\\blend", 1);
-	// imgStitch("data\\DSC_2940.bmp", "data\\DSC_2941.bmp", "resultImg\\blend", 1);
-	// imgStitch("data\\DSC_2958.bmp", "data\\DSC_2959.bmp", "resultImg\\blend", 1);
-	// imgStitch("data\\DSC_2956.bmp", "data\\DSC_2957.bmp", "resultImg\\blend", 1);
-	// imgStitch("data\\DSC_2938.bmp", "data\\DSC_2939.bmp", "resultImg\\blend", 1);
-	// imgStitch("data\\DSC_2942.bmp", "data\\DSC_2943.bmp", "resultImg\\blend", 1);
-	// imgStitch("data\\DSC_2946.bmp", "data\\DSC_2947.bmp", "resultImg\\blend", 1);
-	
+	// imgStitch("data//DSC_2936.bmp", "data//DSC_2937.bmp", "resultImg//blend", 1);
+	// imgStitch("data//DSC_2944.bmp", "data//DSC_2945.bmp", "resultImg//blend", 1);
+	// imgStitch("data//DSC_2952.bmp", "data//DSC_2953.bmp", "resultImg//blend", 1);
+	// imgStitch("data//DSC_2940.bmp", "data//DSC_2941.bmp", "resultImg//blend", 1);
+	// imgStitch("data//DSC_2958.bmp", "data//DSC_2959.bmp", "resultImg//blend", 1);
+	// imgStitch("data//DSC_2956.bmp", "data//DSC_2957.bmp", "resultImg//blend", 1);
+	// imgStitch("data//DSC_2938.bmp", "data//DSC_2939.bmp", "resultImg//blend", 1);
+	// imgStitch("data//DSC_2942.bmp", "data//DSC_2943.bmp", "resultImg//blend", 1);
+	// imgStitch("data//DSC_2946.bmp", "data//DSC_2947.bmp", "resultImg//blend", 1);
+
 	return 0;
 }
 //====================================================================================

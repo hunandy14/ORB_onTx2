@@ -3,15 +3,18 @@ CXX := g++
 CXXFLAGS :=
 # CXXFLAGS += -g
 CXXFLAGS += -O3
-CXXFLAGS += -std=c++14
+CXXFLAGS += -std=c++11
 # CXXFLAGS += -fopenmp
 
 CXXLIB :=
-CXXLIB += -I/home/nvidia/ORB_onTx2/ImgRaw/imglib
-CXXLIB += -I/home/nvidia/ORB_onTx2/ImgRaw/Raw2Img
-CXXLIB += -I/home/nvidia/ORB_onTx2/ImgRaw
+CXXLIB += `pkg-config opencv --libs`
+CXXLIB += -IImgRaw/imglib
+CXXLIB += -IImgRaw/Raw2Img
+CXXLIB += -IImgRaw
 
-CXXFLAGS += $(CXXLIB)
+CXXINC :=
+CXXINC += `pkg-config opencv --cflags`
+CXXFLAGS += $(CXXLIB) $(CXXINC)
 # =============================================
 # make 預設執行
 # =============================================
@@ -22,21 +25,21 @@ resule: main
 # =============================================
 # 連結所有編譯後的檔案產生可執行檔
 main: main.o Raw2img.o imglib.o Imgraw.o
-	$(CXX) $(CXXFLAGS) *.o -o main
+	$(CXX) *.o -o main $(CXXFLAGS)
 
 
 # Main 檔案
 main.o: main.cpp
-	$(CXX) $(CXXFLAGS) -c main.cpp
+	$(CXX) -c main.cpp $(CXXFLAGS)
 # Raw2Img 檔案
 Raw2img.o: ImgRaw/Raw2Img/Raw2img.cpp ImgRaw/Raw2Img/Raw2img.hpp ImgRaw/Raw2Img/Raw2img_type.hpp
-	$(CXX) $(CXXFLAGS) -c ImgRaw/Raw2Img/Raw2img.cpp
+	$(CXX) -c ImgRaw/Raw2Img/Raw2img.cpp $(CXXFLAGS)
 # imglib 檔案
 imglib.o: ImgRaw/imglib/imglib.cpp ImgRaw/imglib/imglib.hpp
-	$(CXX) $(CXXFLAGS) -c ImgRaw/imglib/imglib.cpp
+	$(CXX) -c ImgRaw/imglib/imglib.cpp $(CXXFLAGS)
 # # # imglib 檔案
 Imgraw.o: ImgRaw/Imgraw.cpp ImgRaw/Imgraw.hpp
-	$(CXX) $(CXXFLAGS) -c ImgRaw/Imgraw.cpp
+	$(CXX) -c ImgRaw/Imgraw.cpp $(CXXFLAGS)
 
 
 # =============================================
