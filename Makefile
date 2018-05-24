@@ -36,7 +36,7 @@ main: \
 \
 	feat.o \
 	harris_coners.o \
-	fastlib/fast.o \
+	fast.o \
 
 	$(CXX) *.o -o main $(CXXFLAGS)
 
@@ -70,7 +70,7 @@ harris_coners.o: harris_coners/harris_coners.cpp harris_coners/harris_coners.hpp
 	$(CXX) -c harris_coners/harris_coners.cpp $(CXXFLAGS)
 
 fastlib_file := fastlib/fast_10.c  fastlib/fast_11.c  fastlib/fast_12.c  fastlib/fast_9.c  fastlib/fast.c fastlib/nonmax.c
-fastlib/fast.o: fastlib/fast.c # 太多個了求方便只抓一個檢查
+fast.o: fastlib/fast.c # 太多個了求方便只抓一個檢查
 	$(CXX) -c $(fastlib_file) $(CXXFLAGS)
 
 
