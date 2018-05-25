@@ -92,11 +92,12 @@ resule: ./main.out
 # 清理所有編譯的檔案
 clean:
 	rm -f *.o *.out
-	rm -f obj/*.o *.out
 cleanimg:
-	rm -f ImgOutput/*.bmp
+	rm -f resultImg/*.bmp
 # 僅編譯出可執行檔，並清除緩存
 run: resule
 	./main.out
-rebuile: clean resule
+rerun: clean resule
+	./main.out
+rebuild: clean resule
 	./main.out
