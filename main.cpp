@@ -40,22 +40,22 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	// //====================================================================================
 	Timer t1;
 	Timer total;
-	t1.priSta=0;
+	t1.priSta=1;
 	// ORB
 	Feat feat, feat2;
-	t1.start();
+	// t1.start();
 	create_ORB(img1_gray, feat); // 0.25ms
-	t1.print(" create_ORB1");
+	// t1.print(" create_ORB1");
 
-	t1.start();
+	// t1.start();
 	create_ORB(img2_gray, feat2); // 0.25ms
-	t1.print(" create_ORB2");
+	// t1.print(" create_ORB2");
 
 	// 尋找配對點
 	vector<double> HomogMat;
 	t1.start();
 	matchORB(feat2, feat, HomogMat); // 1ms
-	t1.print(" matchORB");
+	// t1.print(" matchORB");
 
 	// // 測試配對點
 	// stackImg.bmp("merge.bmp");
@@ -73,20 +73,20 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	//====================================================================================
 	// 獲得偏差值
 	int mx, my; double focals;
-	t1.start();
+	//t1.start();
 	estimateFocal(HomogMat, focals); // 0ms
-	t1.print(" getWarpFocal");
-	t1.start();
+	//t1.print(" getWarpFocal");
+	//t1.start();
 	getWarpOffset(imgL, imgR, RANSAC_feat, RANSAC_num, mx, my, focals); // 0ms
-	t1.print(" getWarpOffset");
-	//cout << "ft=" << focals << ", Ax=" << mx << ", Ay=" << my << ";" << endl;
+	//t1.print(" getWarpOffset");
+	cout << "ft=" << focals << ", Ax=" << mx << ", Ay=" << my << ";" << endl;
 
 
 
 	// //====================================================================================
-	t1.start();
+	//t1.start();
 	LapBlender(lapblend, warpL, warpR, focals, mx, my); // 22ms
-	WarpPers_Stitch(lapblend, warpL, warpR, HomogMat);
+	//WarpPers_Stitch(lapblend, warpL, warpR, HomogMat);
 	t1.print(" LapBlender");
 	//cout << "=======================================" << endl;
 	total.print("# total time"); // 93ms
