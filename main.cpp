@@ -40,7 +40,7 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	// //====================================================================================
 	Timer t1;
 	Timer total;
-	t1.priSta=1;
+	t1.priSta=0;
 	// ORB
 	Feat feat, feat2;
 	t1.start();
@@ -66,27 +66,27 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	Feature** RANSAC_feat=nullptr;
 	// RANSAC_feat = new Feature*[RANSAC_num];
 	getNewfeat(feat2, RANSAC_feat, RANSAC_num);
-	featDrawLine2("resultImg//_matchImg_RANSACImg"+to_string(num)+".bmp", stackImg, RANSAC_feat, RANSAC_num);
+	// featDrawLine2("resultImg//_matchImg_RANSACImg"+to_string(num)+".bmp", stackImg, RANSAC_feat, RANSAC_num);
 
 
 
 	//====================================================================================
 	// 獲得偏差值
 	int mx, my; double focals;
-	//t1.start();
+	t1.start();
 	estimateFocal(HomogMat, focals); // 0ms
-	//t1.print(" getWarpFocal");
-	//t1.start();
+	t1.print(" getWarpFocal");
+	t1.start();
 	getWarpOffset(imgL, imgR, RANSAC_feat, RANSAC_num, mx, my, focals); // 0ms
-	//t1.print(" getWarpOffset");
+	t1.print(" getWarpOffset");
 	//cout << "ft=" << focals << ", Ax=" << mx << ", Ay=" << my << ";" << endl;
 
 
 
 	// //====================================================================================
-	//t1.start();
+	t1.start();
 	LapBlender(lapblend, warpL, warpR, focals, mx, my); // 22ms
-	//WarpPers_Stitch(lapblend, warpL, warpR, HomogMat);
+	WarpPers_Stitch(lapblend, warpL, warpR, HomogMat);
 	t1.print(" LapBlender");
 	//cout << "=======================================" << endl;
 	total.print("# total time"); // 93ms
