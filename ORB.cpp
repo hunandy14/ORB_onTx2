@@ -309,7 +309,7 @@ void matchORB(Feat& feat1, const Feat& feat2, vector<double>& HomogMat) {
 	feat1.distance.resize(feat1.size());
 	for(int i = 0; i < feat1.size(); i++){
 		if(feat1.distance[i] > 6 * min_dist) {
-			cout << "TEST=" << endl;
+			//cout << "TEST=" << endl;
 			//good_matches.push_back(matches[i]);
 			feat1.feat_match[i].x = -1;
 			feat1.feat_match[i].y = -1;

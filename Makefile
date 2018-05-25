@@ -4,7 +4,7 @@ CXXFLAGS :=
 # CXXFLAGS += -g
 CXXFLAGS += -O3
 CXXFLAGS += -std=c++11
-# CXXFLAGS += -fopenmp
+CXXFLAGS += -fopenmp
 
 CXXLIB := 
 CXXLIB += -I/
