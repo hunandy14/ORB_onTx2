@@ -1,4 +1,4 @@
-/*****************************************************************
+ï»¿/*****************************************************************
 Name : 
 Date : 2018/03/01
 By   : CharlotteHonG
@@ -6,7 +6,7 @@ Final: 2018/03/19
 *****************************************************************/
 #pragma once
 
-// ­ì©l±qOpenCV®³¥X¨Óªº.
+// åŸå§‹å¾OpenCVæ‹¿å‡ºä¾†çš„.
 const int bit_pattern_31_[256 * 4] =
 {
     8,-3, 9,5/*mean (0), correlation (0)*/,
@@ -267,7 +267,7 @@ const int bit_pattern_31_[256 * 4] =
     -1,-6, 0,-11/*mean (0.127148), correlation (0.547401)*/
 };
 
-// Âà¸m«áªº.
+// è½‰ç½®å¾Œçš„.
 const int bit_pattern_31_0[256 * 4] =
 {
 	8,-3, 9,5,
@@ -3377,7 +3377,7 @@ const int bit_pattern_31_330[256 * 4] =
 	2,-6, 6,-10,
 };
 
-// ¯Ç¤J³æ¤@°}¦C¤º.
+// ç´å…¥å–®ä¸€é™£åˆ—å…§.
 const int* const bit_pattern_31[12] = {
 	bit_pattern_31_0,
 	bit_pattern_31_30,
@@ -3395,25 +3395,25 @@ const int* const bit_pattern_31[12] = {
 
 namespace ORB_bit{
 	inline void angle_trans(float& x, float& y, float sita){
-		const double M_PI = 3.14159265358979323846;
-		// ¹wºâ
+		// const double M_PI = 3.14159265358979323846;
+		// é ç®—
 		sita = -sita;
 		float cos_t = cosf(sita*(float)(M_PI/180));  
 		float sin_t = sinf(sita*(float)(M_PI/180));
-		// ¿é¤J·s¹Ï®y¼Ğªğ¦^ÂÂ¹Ï®y¼Ğ(¤w0, 0¬°¶ê¤ß±ÛÂà)
-		float r_rot = - (y)*sin_t + (x)*cos_t; // ­ì¹ÏX®y¼Ğ
-		float c_rot =   (y)*cos_t + (x)*sin_t; // ­ì¹ÏY®y¼Ğ
+		// è¼¸å…¥æ–°åœ–åº§æ¨™è¿”å›èˆŠåœ–åº§æ¨™(å·²0, 0ç‚ºåœ“å¿ƒæ—‹è½‰)
+		float r_rot = - (y)*sin_t + (x)*cos_t; // åŸåœ–Xåº§æ¨™
+		float c_rot =   (y)*cos_t + (x)*sin_t; // åŸåœ–Yåº§æ¨™
 		x = round(r_rot);
 		y = round(c_rot);
 	}
 	inline void getTransData(float sita = 0){
-		const double M_PI = 3.14159265358979323846;
+		// const double M_PI = 3.14159265358979323846;
 		cout << "const int bit_pattern_31_" << to_string((int)sita) << "[256 * 4] = \n{\n";
 		for(int i = 0; i < 512; i++){
 			float x = bit_pattern_31_[i*2 + 0];
 			float y = bit_pattern_31_[i*2 + 1];
 
-			// Âà´«®y¼Ğ
+			// è½‰æ›åº§æ¨™
 			angle_trans(x, y, sita);
 
 			if(!(i%2)){

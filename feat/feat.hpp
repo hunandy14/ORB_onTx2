@@ -6,9 +6,9 @@ Final: 2018/03/19
 *****************************************************************/
 #pragma once
 #include <bitset>
-extern "C" {
+// extern "C" {
 #include "fast.h"
-}
+// }
 
 using namespace std;
 typedef unsigned char uchar;
