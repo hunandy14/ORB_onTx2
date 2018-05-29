@@ -141,18 +141,18 @@ static OrbDest descriptor_ORB(const ImgRaw& img, int x, int y, double sing) {
 
 		// 描述點對
 		// todo 乾 這裡好像有錯
-		const int singIdx = sing/30.0;
-		int x1 = x + bit_pattern_31[singIdx][k*4 + 0];
-		int y1 = y + bit_pattern_31[singIdx][k*4 + 1];
-		int x2 = x + bit_pattern_31[singIdx][k*4 + 3];
-		int y2 = y + bit_pattern_31[singIdx][k*4 + 4];
-
-		// 不旋轉
-		/*const int singIdx = 0;
+		/*const int singIdx = sing/30.0;
 		int x1 = x + bit_pattern_31[singIdx][k*4 + 0];
 		int y1 = y + bit_pattern_31[singIdx][k*4 + 1];
 		int x2 = x + bit_pattern_31[singIdx][k*4 + 3];
 		int y2 = y + bit_pattern_31[singIdx][k*4 + 4];*/
+
+		// 不旋轉
+		const int singIdx = 0;
+		int x1 = x + bit_pattern_31[singIdx][k*4 + 0];
+		int y1 = y + bit_pattern_31[singIdx][k*4 + 1];
+		int x2 = x + bit_pattern_31[singIdx][k*4 + 3];
+		int y2 = y + bit_pattern_31[singIdx][k*4 + 4];
 
 		bin[k] = Compare(img, x1, y1, x2, y2);
 	}
@@ -280,7 +280,7 @@ void matchORB(Feat& feat1, const Feat& feat2, vector<double>& HomogMat) {
 		}
 		// 加入匹配點
 		//cout << "dist=" << dist << endl;
-		if(dist > 24 /*or
+		if(dist > 16 /*or
 					 abs(feat1.feat[j].y - feat2.feat[matchIdx].y) > 1000*/ )
 		{
 			// 沒配到的標記 -1 待會刪除
@@ -308,7 +308,7 @@ void matchORB(Feat& feat1, const Feat& feat2, vector<double>& HomogMat) {
 	// (發現找到的點已經很少了刪減沒什麼必要)
 	feat1.distance.resize(feat1.size());
 	for(int i = 0; i < feat1.size(); i++){
-		if(feat1.distance[i] > 6 * min_dist) {
+		if(feat1.distance[i] > 5 * min_dist) {
 			//cout << "TEST=" << endl;
 			//good_matches.push_back(matches[i]);
 			feat1.feat_match[i].x = -1;
@@ -338,7 +338,7 @@ void matchORB(Feat& feat1, const Feat& feat2, vector<double>& HomogMat) {
 
 	// get Homography and RANSAC mask
 	vector<char> RANSAC_mask;
-	Mat Hog = findHomography(featPoint1, featPoint2, RANSAC, 3, RANSAC_mask, 2000, 0.995);
+	Mat Hog = findHomography(featPoint1, featPoint2, RANSAC, 3, RANSAC_mask, 500, 0.995);
 
 	// 更新到 feat
 	feat1.len=featPoint1.size();

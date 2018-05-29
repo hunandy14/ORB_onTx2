@@ -8,12 +8,12 @@
             "type": "shell",
             "command": "make",
             "args": [
-                ""
+                "run"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
-        }
+        },
     ]
 }

@@ -79,7 +79,8 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	//t1.start();
 	getWarpOffset(imgL, imgR, RANSAC_feat, RANSAC_num, mx, my, focals); // 0ms
 	//t1.print(" getWarpOffset");
-	cout << "ft=" << focals << ", Ax=" << mx << ", Ay=" << my << ";" << endl;
+	cout << "ft=" << focals << ", Ax=" << mx << ", Ay=" << my << ";  HogX="
+	 << HomogMat[2] << ", HogY=" << HomogMat[5] << endl;
 
 
 
@@ -109,7 +110,7 @@ int main(int argc, char const *argv[]) {
 
 	// imgStitch("srcImg//kanna.bmp", "srcImg//kanna90.bmp", "resultImg//_test.bmp");
 
-	imgStitch("srcImg//sc02.bmp", "srcImg//sc03.bmp", "resultImg//sc02_blend.bmp");
+	// imgStitch("srcImg//sc02.bmp", "srcImg//sc03.bmp", "resultImg//sc02_blend.bmp");
 	// imgStitch("srcImg//ball_01.bmp", "srcImg//ball_02.bmp", "resultImg//ball_01_blend.bmp");
 
 	imgStitch("data//DSC_2936.bmp", "data//DSC_2937.bmp", "resultImg//blend", 1);
@@ -121,6 +122,9 @@ int main(int argc, char const *argv[]) {
 	imgStitch("data//DSC_2938.bmp", "data//DSC_2939.bmp", "resultImg//blend", 1);
 	imgStitch("data//DSC_2942.bmp", "data//DSC_2943.bmp", "resultImg//blend", 1);
 	imgStitch("data//DSC_2946.bmp", "data//DSC_2947.bmp", "resultImg//blend", 1);
+
+	imgStitch("data//DSC_2981.bmp", "data//DSC_2982.bmp", "resultImg//blend", 1);
+	imgStitch("data//DSC_2984.bmp", "data//DSC_2983.bmp", "resultImg//blend", 1);
 
 	return 0;
 }
