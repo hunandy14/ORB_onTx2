@@ -320,8 +320,8 @@ void cpuWarpScale(const basic_ImgData &src, basic_ImgData &dst, double Ratio){
 	}
 }
 void WarpScale(const basic_ImgData &src, basic_ImgData &dst, double Ratio){
-	cpuWarpScale(src, dst, Ratio);
-	//cuWarpScale_rgb(src, dst, Ratio);
+	//cpuWarpScale(src, dst, Ratio);
+	cuWarpScale_rgb(src, dst, Ratio);
 }
 
 void pyraUp(const basic_ImgData &src, basic_ImgData &dst) {

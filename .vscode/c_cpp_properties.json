@@ -9,7 +9,13 @@
                 "limitSymbolsToIncludedHeaders": true
             },
             "includePath": [
-                "${workspaceFolder}/**",
+                "${workspaceFolder}/fastlib",
+                "${workspaceFolder}/feat",
+                "${workspaceFolder}/getFocus",
+                "${workspaceFolder}/harris_coners",
+                "${workspaceFolder}/ImgRaw",
+                "${workspaceFolder}/LapBlend",
+                "${workspaceFolder}/WarpPers",
                 "/usr/local/cuda-9.0/include",
                 "/usr/local/include"
             ],
