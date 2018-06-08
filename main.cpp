@@ -87,7 +87,7 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	// //====================================================================================
 	t1.start();
 	LapBlender(lapblend, warpL, warpR, focals, mx, my); // 22ms
-	WarpPers_Stitch(lapblend, warpL, warpR, HomogMat);
+	// WarpPers_Stitch(lapblend, warpL, warpR, HomogMat);
 	t1.print(" LapBlender");
 	cout << "=======================================" << endl;
 	total.print("# total time"); // 93ms

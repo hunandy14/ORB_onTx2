@@ -9,6 +9,7 @@ Final: 2018/01/08
 #include <cmath>
 using namespace std;
 
+#include "Timer.hpp"
 #include "cubilinear.hpp"
 #define BLOCK_DIM 16.0
 

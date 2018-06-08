@@ -8,7 +8,6 @@ Final: 2018/01/08
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include "CudaMem.cuh"
-#include "Timer.hpp"
 #include "Raw2img.hpp"
 
 // struct basic_ImgData {
