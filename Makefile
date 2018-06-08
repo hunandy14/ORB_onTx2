@@ -1,10 +1,11 @@
 # cxx
-CXX := g++
+CXX := nvcc
 CXXFLAGS :=
-# CXXFLAGS += -g
 CXXFLAGS += -O3
 CXXFLAGS += -std=c++11
-CXXFLAGS += -fopenmp
+# CXXFLAGS += -fopenmp
+CXXFLAGS += -Xcompiler -fopenmp
+
 
 CXXLIB := 
 CXXLIB += -I/

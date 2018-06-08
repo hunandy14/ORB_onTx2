@@ -9,6 +9,13 @@
                 "limitSymbolsToIncludedHeaders": true
             },
             "includePath": [
+                "${workspaceFolder}/fastlib",
+                "${workspaceFolder}/feat",
+                "${workspaceFolder}/getFocus",
+                "${workspaceFolder}/harris_coners",
+                "${workspaceFolder}/LapBlend",
+                "${workspaceFolder}/WarpPers",
+                "${workspaceFolder}/ImgRaw",
                 "${workspaceFolder}/**",
                 "/usr/local/include"
             ],
