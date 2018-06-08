@@ -16,6 +16,7 @@ CXXLIB += -IImgRaw
 CXXLIB += -Ifeat
 CXXLIB += -Iharris_coners
 CXXLIB += -Ifastlib
+CXXLIB += -Icubilinear
 
 CXXINC :=
 CXXINC += `pkg-config opencv --cflags`
@@ -41,6 +42,8 @@ main.out: \
 	getFocus.o\
 	LapBlend.o\
 	WarpPers.o\
+\
+	cubilinear.o\
 
 	$(CXX) *.o -o main.out $(CXXFLAGS)
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -84,6 +87,11 @@ LapBlend.o: LapBlend/LapBlend.cpp LapBlend/LapBlend.hpp
 	$(CXX) -c LapBlend/LapBlend.cpp $(CXXFLAGS)
 WarpPers.o: WarpPers/WarpPers.cpp WarpPers/WarpPers.hpp
 	$(CXX) -c WarpPers/WarpPers.cpp $(CXXFLAGS)
+
+# cuda
+cubilinear.o: cubilinear/cubilinear.cu cubilinear/cubilinear.hpp
+	$(CXX) -c cubilinear/cubilinear.cu $(CXXFLAGS)
+
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # =============================================
 # 命令列

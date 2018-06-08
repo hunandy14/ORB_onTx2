@@ -13,6 +13,7 @@ using namespace std;
 #include "Timer.hpp"
 #include "Raw2img.hpp"
 #include "LapBlend.hpp"
+#include "cubilinear.hpp"
 
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -276,7 +277,7 @@ static vector<double> getGauKer(int x){
 //==================================================================================
 // 金字塔處理
 //==================================================================================
-void WarpScale(const basic_ImgData &src, basic_ImgData &dst, double Ratio){
+void cpuWarpScale(const basic_ImgData &src, basic_ImgData &dst, double Ratio){
 	int newH = (int)((src.height * Ratio) +0.5);
 	int newW = (int)((src.width  * Ratio) +0.5);
 	// 初始化 dst
@@ -318,6 +319,11 @@ void WarpScale(const basic_ImgData &src, basic_ImgData &dst, double Ratio){
 		}
 	}
 }
+void WarpScale(const basic_ImgData &src, basic_ImgData &dst, double Ratio){
+	cpuWarpScale(src, dst, Ratio);
+	//cuWarpScale_rgb(src, dst, Ratio);
+}
+
 void pyraUp(const basic_ImgData &src, basic_ImgData &dst) {
 	int newH = (int)(src.height * 2.0);
 	int newW = (int)(src.width  * 2.0);
