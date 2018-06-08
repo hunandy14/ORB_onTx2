@@ -1,5 +1,7 @@
 # User
 resultImg/*.bmp
+*.o
+*.bmp
 
 # Prerequisites
 *.d
