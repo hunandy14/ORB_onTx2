@@ -28,7 +28,7 @@ public:
 		malloc(size);
 		memcpyIn(dataIn, size);
 	}
-	~CudaData(){
+	virtual ~CudaData(){
 		if(gpuData!=nullptr) {
 			cudaFree(gpuData);
 			gpuData = nullptr;
@@ -45,7 +45,7 @@ public:
 		if(size > len) {throw out_of_range("memcpyIn input size > curr size.");}
 		cudaMemcpy(gpuData, dataIn, size*sizeof(T), cudaMemcpyHostToDevice);
 	}
-	void memcpyOut(T* dst ,size_t size) {
+	void memcpyOut(T* dst ,size_t size) const {
 		cudaMemcpy(dst, gpuData, size*sizeof(T), cudaMemcpyDeviceToHost);
 	}
 	void memset(int value, size_t size) {
@@ -64,12 +64,12 @@ public:
 	operator const T*() const {
 		return gpuData;
 	}
-private:
+public:
 	T* gpuData = nullptr;
 	size_t len = 0;
 };
 
-// 第一次malloc非常耗時
+// 預啟動cuda核心
 static CudaData<int> __CudaDataInit__(0);
 
 

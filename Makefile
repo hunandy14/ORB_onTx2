@@ -62,35 +62,28 @@ Imgraw.o: ImgRaw/Imgraw.cpp ImgRaw/Imgraw.hpp
 # opencvTest 檔案
 opencvTest.o: opencvTest.cpp opencvTest.hpp
 	$(CXX) -c opencvTest.cpp $(CXXFLAGS)
+
+	
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-# 範例
-# .o: .cpp .hpp
-# 	$(CXX) -c .cpp $(CXXFLAGS)
-
 # ORB 檔案
-ORB.o: ORB.cpp ORB.hpp
-	$(CXX) -c ORB.cpp $(CXXFLAGS)
-
+fastlib.o: fastlib/fastlib.cpp fastlib/fast.h
+	$(CXX) -c fastlib/fastlib.cpp $(CXXFLAGS)
 feat.o: feat/feat.cpp feat/feat.hpp
 	$(CXX) -c feat/feat.cpp $(CXXFLAGS)
 harris_coners.o: harris_coners/harris_coners.cpp harris_coners/harris_coners.hpp
 	$(CXX) -c harris_coners/harris_coners.cpp $(CXXFLAGS)
-# fastlib_file := fastlib/fast_10.c  fastlib/fast_11.c  fastlib/fast_12.c  fastlib/fast_9.c  fastlib/fast.c fastlib/nonmax.c
-# fast.o: fastlib/fast.c # 太多個了求方便只抓一個檢查
-# 	$(CXX) -c $(fastlib_file) $(CXXFLAGS)
-fastlib.o: fastlib/fastlib.cpp fastlib/fast.h
-	$(CXX) -c fastlib/fastlib.cpp $(CXXFLAGS)
+ORB.o: ORB.cpp ORB.hpp
+	$(CXX) -c ORB.cpp $(CXXFLAGS)
 
+# LapBlend
 getFocus.o: getFocus/getFocus.cpp getFocus/getFocus.hpp
 	$(CXX) -c getFocus/getFocus.cpp $(CXXFLAGS)
-LapBlend.o: LapBlend/LapBlend.cpp LapBlend/LapBlend.hpp
-	$(CXX) -c LapBlend/LapBlend.cpp $(CXXFLAGS)
 WarpPers.o: WarpPers/WarpPers.cpp WarpPers/WarpPers.hpp
 	$(CXX) -c WarpPers/WarpPers.cpp $(CXXFLAGS)
-
-# cuda
 cubilinear.o: cubilinear/cubilinear.cu cubilinear/cubilinear.hpp
 	$(CXX) -c cubilinear/cubilinear.cu $(CXXFLAGS)
+LapBlend.o: LapBlend/LapBlend.cpp LapBlend/LapBlend.hpp
+	$(CXX) -c LapBlend/LapBlend.cpp $(CXXFLAGS)
 
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # =============================================
