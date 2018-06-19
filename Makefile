@@ -17,6 +17,8 @@ CXXLIB += -Ifeat
 CXXLIB += -Iharris_coners
 CXXLIB += -Ifastlib
 CXXLIB += -Icubilinear
+CXXLIB += -ILapBlend
+CXXLIB += -ITimer
 
 CXXINC :=
 CXXINC += `pkg-config opencv --cflags`
