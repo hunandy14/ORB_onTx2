@@ -2,9 +2,9 @@
 CXX := nvcc
 CXXFLAGS :=
 CXXFLAGS += -O3
-CXXFLAGS += -std=c++11
+CXXFLAGS += -std=c++14
 # CXXFLAGS += -fopenmp
-CXXFLAGS += -Xcompiler -fopenmp
+# CXXFLAGS += -Xcompiler -fopenmp
 
 
 CXXLIB := 
