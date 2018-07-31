@@ -19,7 +19,21 @@ using namespace cv;
 #include "ImgRaw/Imgraw.hpp"
 #include "Imgraw.hpp"
 
+void cvInitializeOpenCL() {
+	cout << "cvInitializeOpenCL...\n";
+	/*const ImgData img1("kanna.bmp");
+	vector<LATCH::KeyPoint> key;
+	HarrisCroner(key, img1.toConvertGray());*/
+	
+	using namespace cv;
 
+	Mat cvImg(3, 3, CV_8U);
+	UMat ugray = cvImg.getUMat(ACCESS_RW);
+
+	vector<Point2f> corners;
+	goodFeaturesToTrack(ugray, corners, 2000, 0.01, 3);
+	cout << "cvInitializeOpenCL...done\n\n";
+}
 void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool autoname=0) {
 	static int num=0;
 	// 開圖
@@ -43,19 +57,19 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	t1.priSta=1;
 	// ORB
 	Feat feat, feat2;
-	// t1.start();
+	t1.start();
 	create_ORB(img1_gray, feat); // 0.25ms
-	// t1.print(" create_ORB1");
+	t1.print(" create_ORB1");
 
-	// t1.start();
+	t1.start();
 	create_ORB(img2_gray, feat2); // 0.25ms
-	// t1.print(" create_ORB2");
+	t1.print(" create_ORB2");
 
 	// 尋找配對點
 	vector<double> HomogMat;
 	t1.start();
 	matchORB(feat2, feat, HomogMat); // 1ms
-	// t1.print(" matchORB");
+	t1.print(" matchORB");
 
 	// // 測試配對點
 	// stackImg.bmp("merge.bmp");
@@ -66,7 +80,7 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 	Feature** RANSAC_feat=nullptr;
 	// RANSAC_feat = new Feature*[RANSAC_num];
 	getNewfeat(feat2, RANSAC_feat, RANSAC_num);
-	// featDrawLine2("resultImg//_matchImg_RANSACImg"+to_string(num)+".bmp", stackImg, RANSAC_feat, RANSAC_num);
+	featDrawLine2("resultImg//_matchImg_RANSACImg"+to_string(num)+".bmp", stackImg, RANSAC_feat, RANSAC_num);
 
 
 
@@ -106,12 +120,16 @@ void imgStitch(string name1, string name2, string outName="__lapBlend.bmp", bool
 }
 //====================================================================================
 int main(int argc, char const *argv[]) {
+	cvInitializeOpenCL();
 	cout << "=!!======= run is good =======!!=" << endl;
 
 	// imgStitch("srcImg//kanna.bmp", "srcImg//kanna90.bmp", "resultImg//_test.bmp");
 
-	imgStitch("srcImg//sc02.bmp", "srcImg//sc03.bmp", "resultImg//sc02_blend.bmp");
-	// imgStitch("srcImg//ball_01.bmp", "srcImg//ball_02.bmp", "resultImg//ball_01_blend.bmp");
+	// imgStitch("srcImg//sc02.bmp", "srcImg//sc03.bmp", "resultImg//01.bmp");
+	// imgStitch("srcImg//grail04.bmp", "srcImg//grail03.bmp", "resultImg////02.bmp");
+	// imgStitch("srcImg//denny07.bmp", "srcImg//denny08.bmp", "resultImg////03.bmp");
+	// imgStitch("srcImg//DSC_2958.bmp", "srcImg//DSC_2959.bmp", "resultImg////04.bmp");
+	//imgStitch("srcImg//ball_01.bmp", "srcImg//ball_02.bmp", "resultImg//ball_01_blend.bmp");
 
 	/*imgStitch("data//DSC_2936.bmp", "data//DSC_2937.bmp", "resultImg//blend", 1);
 	imgStitch("data//DSC_2944.bmp", "data//DSC_2945.bmp", "resultImg//blend", 1);
@@ -125,6 +143,12 @@ int main(int argc, char const *argv[]) {
 
 	imgStitch("data//DSC_2981.bmp", "data//DSC_2982.bmp", "resultImg//blend", 1);
 	imgStitch("data//DSC_2984.bmp", "data//DSC_2983.bmp", "resultImg//blend", 1);*/
+
+	// imgStitch("srcImg//ball_01.bmp", "srcImg//ball_02.bmp", "resultImg//ball_01_blend.bmp");
+	// imgStitch("data2//ball01-1.bmp", "data2//ball01-2.bmp", "resultImg//01.bmp");
+	// imgStitch("data2//ball02-1.bmp", "data2//ball02-2.bmp", "resultImg//02.bmp");
+	imgStitch("data2//ball03-1.bmp", "data2//ball03-2.bmp", "resultImg//03.bmp");
+
 
 	return 0;
 }

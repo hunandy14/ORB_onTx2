@@ -174,27 +174,42 @@ static void desc_ORB(const ImgRaw& img, Feat& feat) {
 	feat.bin = std::move(bin);
 }
 void create_ORB(const ImgRaw& img, Feat& feat) {
+	Timer t1;
 // FAST特徵點 ---> 8~10ms
-	fast(img, feat);
-
+	// t1.start();
+	// fast(img, feat);
+	// t1.print("    FAST");
 	
 // 初始化mask --- >0ms
 	Mat image(img.height, img.width, CV_32F, (void*)img.raw_img.data());
-	Mat gray=image;
+	Mat& gray=image;
+
 	Mat mask(Mat::zeros(Size(img.width, img.height),CV_8U));
-	Mat mask2(Mat::ones(Size(img.width, img.height),CV_8U));
+	Mat mask2(Mat::zeros(Size(img.width, img.height),CV_8U));
 	// 把 feat 的 xy 轉到 mask
 	int edg=3+20;
-	for(int i = 0; i < feat.len; i++) {
-		//idx = (feat.feat->y)*image.rows + (feat.feat->x);
-		int x=feat[i].x;
-		int y=feat[i].y;
-		Point pt(x, y);
-		//cout << "string=" << pt << endl;
+	// for(int i = 0; i < feat.len; i++) {
+	// 	//idx = (feat.feat->y)*image.rows + (feat.feat->x);
+	// 	int x=feat[i].x;
+	// 	int y=feat[i].y;
+	// 	Point pt(x, y);
+	// 	//cout << "string=" << pt << endl;
 
-		// 過濾邊緣位置
-		if(x>=(edg) and x<=img.width-(edg) && y>=(edg) and y<=img.height-(edg)) {
-			mask.at<uchar>(pt) = 255;
+	// 	// 過濾邊緣位置
+	// 	if(x>=(edg) and x<=img.width-(edg) && y>=(edg) and y<=img.height-(edg)) {
+	// 		mask.at<uchar>(pt) = 255;
+	// 	}
+	// }
+
+	for(unsigned j = 0; j < img.height; ++j) {
+		for(unsigned i = 0; i < img.width; ++i) {
+			int x=i;
+			int y=j;
+			// 過濾邊緣位置
+			Point pt(i, j);
+			if(x>=(edg) and x<=img.width-(edg) && y>=(edg) and y<=img.height-(edg)) {
+				mask2.at<uchar>(pt) = 255;
+			}
 		}
 	}
 	//cout << "FAST corner 數量 = " << feat.len << endl;
@@ -202,13 +217,22 @@ void create_ORB(const ImgRaw& img, Feat& feat) {
 
 // Herris 過濾 --> 8~10ms	
 	vector<Point2f> corners;
-	goodFeaturesToTrack2(gray, corners, 2000, 0.01, 10, mask, 3, 3, true, 0.04); // 8~10ms
+	UMat ucvImg = gray.getUMat(cv::ACCESS_READ);
+	t1.start();
+	//goodFeaturesToTrack(gray, corners, 2000, 0.01, 10, mask, 3, 3, true, 0.04); // 8~10ms
+
+	goodFeaturesToTrack(ucvImg, corners, 2000, 0.01, 10, mask2, 3, 3, true, 0.04); // 8~10ms
+	//goodFeaturesToTrack(gray, corners, corners.size()/2, 0.01, 9, mask2, 3, 3, true, 0.04); // 8~10ms
+	
+
+	t1.print("goodFeaturesToTrack2");
 	//goodFeaturesToTrack(gray, corners, 1000, 0.01, 10, mask, 3, true, 0.04);
 	//cout << "Harris corner 數量 = " << corners.size() << endl;
 
 
 // 回填 xy 位置 ---> 0ms
 	int newLen=0;
+	feat.feat = new xy[corners.size()];
 	for(int i = 0; i < corners.size(); i++) {
 		int x=corners[i].x;
 		int y=corners[i].y;

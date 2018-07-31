@@ -293,7 +293,7 @@ void LapBlend_Tester() {
 	LapBlender(dst, src1, src2, ft, Ax, Ay);
 	t1.print(" LapBlender");
 	// 輸出圖片
-	ImgData_write(dst, "_WarpCyliMuitBlend.bmp");
+	//ImgData_write(dst, "_WarpCyliMuitBlend.bmp");
 
 	//LapBlend_Tester2();
 }
